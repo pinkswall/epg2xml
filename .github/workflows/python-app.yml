@@ -22,6 +22,6 @@ jobs:
 
             - name: epg to xml
               run: |
-                  epg2xml -o
+                  epg2xml -o --channelfile channels.json
             - name: End.
               run: echo 'epg generated.'
