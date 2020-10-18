@@ -1,28 +1,27 @@
 name: Generate EPG
 
-on: 
-  schedule:
-    - cron: '0 9,21 * *'
+on:
+    schedule:
+        - cron: "0 9,21 * * *"
 
 jobs:
-  build:
+    build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Set up Python 3.8
+              uses: actions/setup-python@v2.1.4
+              with:
+                  python-version: 3.8
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2.1.4
-      with:
-        python-version: 3.8
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install lxml requests bs4
-        
-    - name: epg to xml
-      run: |
-        epg2xml -o 
-    - name: End.
-      run: echo 'epg generated.'
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install lxml requests bs4
+
+            - name: epg to xml
+              run: |
+                  epg2xml -o
+            - name: End.
+              run: echo 'epg generated.'
