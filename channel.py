@@ -1,8 +1,8 @@
 import sqlite3
 import json
-from get_naver_id import get_naver_id
+from getServiceId.getServiceIdFromNaver import getServiceIdFromNaver
 
-naver_ids = get_naver_id()
+naver_ids = getServiceIdFromNaver()
 connect = sqlite3.connect('epg.db')
 cursor = connect.cursor()
 QUERY = """
@@ -26,7 +26,6 @@ tving_name = 9
 tving_id = 10
 
 result = []
-none_serviceId = []
 
 for row in rows:
     if row[tving_id] != None:
