@@ -2,7 +2,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
-def get_naver_id():
+def getServiceIdFromNaver():
   """
   각 채널의 네이버 ServiceId를 파싱합니다. \n
   @return [ 
