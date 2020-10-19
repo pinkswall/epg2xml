@@ -1,6 +1,8 @@
 import sqlite3
 import json
+from get_naver_id import get_naver_id
 
+naver_ids = get_naver_id()
 connect = sqlite3.connect('epg.db')
 cursor = connect.cursor()
 QUERY = """
@@ -24,6 +26,7 @@ tving_name = 9
 tving_id = 10
 
 result = []
+none_serviceId = []
 
 for row in rows:
     if row[tving_id] != None:
@@ -60,21 +63,20 @@ for row in rows:
             'ServiceId': row[lgu_id]
         })
     else:
-        result.append({
-            'Id': row[id],
-            'Name': row[name],
-            'KT Name': row[kt_name],
-            'LG Name': row[lgu_name],
-            'SK Name': row[skb_name],
-            'Icon_url': row[icon],
-            'Source': 'NAVER'
-        })
-
-# with open('Channel.json') as json_file:
-#     data = json.load(json_file)
-
-#     for channel of data:
-#       if channel.Source == 'NAVER':
+        for naver_id in naver_ids:
+            if naver_id['Name'] == row[name]:
+                result.append({
+                    'Id': row[id],
+                    'Name': row[name],
+                    'KT Name': row[kt_name],
+                    'LG Name': row[lgu_name],
+                    'SK Name': row[skb_name],
+                    'Icon_url': row[icon],
+                    'Source': 'NAVER',
+                    'ServiceId': naver_id['Id']
+                })
+                
+                break
 
 
 with open("channels.json", "w") as json_file:
