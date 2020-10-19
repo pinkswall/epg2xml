@@ -75,9 +75,9 @@ for row in rows:
                     'Source': 'NAVER',
                     'ServiceId': naver_id['Id']
                 })
-                
+
                 break
 
 
-with open("channels.json", "w") as json_file:
+with open("Channels.json", "w") as json_file:
     json.dump(result, json_file)
