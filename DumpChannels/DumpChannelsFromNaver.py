@@ -2,13 +2,17 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
-def getServiceIdFromNaver():
+def DumpChannelsFromNaver():
   """
-  각 채널의 네이버 ServiceId를 파싱합니다. \n
+  네이버에서 제공하는 EPG 목록을 파싱합니다. \n
   @return [ 
-    {'Name': '채널이름', 'Id': 'ServiceId'},
-    {'Name': '또다른채널이름', 'Id': 'anotherServiceId'}
-  ]
+    {
+      'NAVER Name': '채널이름',
+      'Source': 'NAVER',
+      'ServiceId': '서비스ID'
+    }
+  ] \n
+  @ request_count 6
   """
 
   UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0'
@@ -30,8 +34,12 @@ def getServiceIdFromNaver():
     channels = html.select('li.item')
 
     for channel in channels:
-      serviceId = channel.find('div', attrs={'class': "u_likeit_list_module _reactionModule zzim"})['data-cid']
+      id = channel.find('div', attrs={'class': "u_likeit_list_module _reactionModule zzim"})['data-cid']
       ch_name = channel.find('div', attrs={'class': "channel_name"}).string
-      result.append({'Name': ch_name, 'Id': serviceId})
+      result.append({
+        'NAVER Name': ch_name,
+        'Source': 'NAVER',
+        'ServiceId': id
+      })
   
   return result
