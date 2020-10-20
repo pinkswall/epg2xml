@@ -13,7 +13,7 @@ def DumpChannelsFromNaver():
       'ServiceId': '서비스ID'
     }
   ] \n
-  @ request_count 6
+  @request_count 6
   """
 
   UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0'
