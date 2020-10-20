@@ -1,5 +1,6 @@
 import json
 import requests
+from datetime import datetime
 
 def DumpChannelsFromSkb():
   """
@@ -38,4 +39,6 @@ def DumpChannelsFromSkb():
       'ServiceId': ch_id
     })
   
-  return result
+  headers = [{'last update': datetime.now().strftime('%Y/%m/%d %H:%M:%S'), 'total': len(result)}]
+
+  return headers + result

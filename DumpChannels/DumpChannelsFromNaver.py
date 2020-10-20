@@ -1,6 +1,7 @@
 import json
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 def DumpChannelsFromNaver():
   """
@@ -45,4 +46,6 @@ def DumpChannelsFromNaver():
         'ServiceId': id
       })
   
-  return result
+  headers = [{'last update':datetime.now().strftime('%Y/%m/%d %H:%M:%S'), 'total':len(result)}]
+  
+  return headers + result
