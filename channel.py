@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from DumpChannels.DumpChannelsFromNaver import DumpChannelsFromNaver
+from DumpChannels.FromNaver import DumpChannelsFromNaver
 
 naver_ids = DumpChannelsFromNaver()
 connect = sqlite3.connect('epg.db')
