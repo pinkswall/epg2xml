@@ -24,11 +24,14 @@ def DumpChannelsFromNaver():
     {'name': '해외위성', 'u1': '9000'},
     {'name': '라디오', 'u1': '400'}
   ]
-
   result = []
+  
   for cat in category:
-    req = requests.get("https://m.search.naver.com/p/csearch/content/nqapirender.nhn?pkid=66&where=nexearch&u1=%s&key=ScheduleChannelList" % cat['u1'], headers={'User-Agent': UA})
-    print('Status Code: ', req.status_code)
+    try:
+      req = requests.get("https://m.search.naver.com/p/csearch/content/nqapirender.nhn?pkid=66&where=nexearch&u1=%s&key=ScheduleChannelList" % cat['u1'], headers={'User-Agent': UA})
+      print('Status Code: ', req.status_code)
+    except Exception as e:
+      print('요청 중 에러: %s' % str(e))
 
     html = BeautifulSoup(json.loads(req.text)['dataHtml'], 'html.parser')
     channels = html.select('li.item')

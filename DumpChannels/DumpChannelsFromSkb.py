@@ -14,9 +14,13 @@ def DumpChannelsFromSkb():
   ] \n
   @request_count 1
   """
+
   UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0'
-  req = requests.get("https://m.skbroadband.com/content/realtime/Realtime_List_Ajax.do", headers={'User-Agent': UA})
-  print('Status Code: ', req.status_code)
+  try:
+    req = requests.get("https://m.skbroadband.com/content/realtime/Realtime_List_Ajax.do", headers={'User-Agent': UA})
+    print('Status Code: ', req.status_code)
+  except Exception as e:
+        print('요청 중 에러: %s' % str(e))
 
   channels = json.loads(req.text)
   result = []
@@ -35,8 +39,3 @@ def DumpChannelsFromSkb():
     })
   
   return result
-  
-
-
-
-print(DumpChannelsFromSkb())
